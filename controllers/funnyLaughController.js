@@ -1,25 +1,39 @@
-const getRandomJoke = (req, res) => {
+//Humourous controllers that will make you die via suffocation from laughing so hard :D 
+
+const getRandomJoke = async (req, res) => {
     res.send('get random joke')
 }
 
-const getJoke = (req, res) => {
+const getJoke = async (req, res) => {
     res.send('get joke')
 }
 
-const getAllJokes = (req, res) => {
+const getAllJokes = async (req, res) => {
     res.send('get all jokes')
 }
 
-const createJoke = (req, res) => {
+const createJoke = async (req, res) => {
     res.send('create joke')
 }
 
-const editJoke = (req, res) => {
+const editJoke = async (req, res) => {
     res.send('edit joke')
 }
 
-const deleteJoke = (req, res) => {
+const deleteJoke = async (req, res) => {
     res.send('get joke')
+}
+
+const getUser = async (req, res) => {
+    res.send('get user')
+}
+
+const getAllUsers = async (req, res) => {
+    res.send('get all user')
+}
+
+const updateJoke = async (req, res) => {
+    res.send('update joke')
 }
 
 //maybe add more if we have time :)
@@ -30,5 +44,8 @@ module.exports = {
     getAllJokes,
     createJoke,
     editJoke,
-    deleteJoke
+    deleteJoke,
+    getUser,
+    getAllUsers,
+    updateJoke
 }
