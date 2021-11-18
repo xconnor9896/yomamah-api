@@ -1,12 +1,18 @@
-const login = (req, res) => {
+//*codes for 8 hours then dies*
+const User = require('../models/user-schema')
+const JWT = require('jsonwebtoken')
+
+const login = async (req, res) => {
     res.send('login')
 }
 
-const register = (req, res) => {
-    res.send('register')
+const register = async (req, res) => {
+    const newUser = await User.create(req.body);
+    const token = newUser.createJWT();
+    res.json({user: {name: newUser.name}, token});
 }
 
-const favoriteJoke = (req, res) => { 
+const favoriteJoke = async (req, res) => { 
     res.send('joke saved')
 }
 
