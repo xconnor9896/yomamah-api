@@ -18,7 +18,7 @@ jokeRouter.route('/')
     .get(getAllJokes)
     .get(getRandomJoke)
     .get(getAllUsers)
-    .put(updateJokeRating)
+    .put(() => updateJokeRating)
 
 jokeRouter.route('/:id')
     .get(getJoke)
@@ -27,7 +27,7 @@ jokeRouter.route('/:id')
     
 
 jokeRouter.route('/:user/:id')
-    .put(editJoke)
+    .put(() => editJoke)
     .delete(deleteJoke)
 
 module.exports = jokeRouter

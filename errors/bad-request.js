@@ -1,11 +1,11 @@
-const CustomAPIError = require('./custom-api-error');
-const {StatusCodes} = require('http-status-codes');
+const CustomAPIError = require("./custom-api-error");
+const {StatusCodes} = require('http-status-codes')
 
-class BadRequest extends CustomAPIError {
-    constructur(message) {
-        super(message);
+class BadRequestError extends CustomAPIError {
+    constructor (message) {
+        super(message)
         this.statusCode = StatusCodes.BAD_REQUEST;
     }
 }
 
-module.exports = BadRequest
+module.exports = BadRequestError;

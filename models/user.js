@@ -16,9 +16,17 @@ const userSchema = new mongoose.Schema({
 
     // might have to scrap this...
     // not entirely sure how to do this
+    //
+    //update: it burns
     favorites: {
         type: Array
+    },
+
+    bio: {
+        type: String,
+        maxlength: [240, `bio can't exceed 240 characters!`]
     }
+
 })
 
 .pre('save', async function (next) {
