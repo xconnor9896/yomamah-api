@@ -16,4 +16,4 @@ const favoriteJoke = async (req, res) => {
     res.send('joke saved')
 }
 
-module.exports = {login, register, favoriteJoke}
+module.exports = {login, register, favoriteJoke};
