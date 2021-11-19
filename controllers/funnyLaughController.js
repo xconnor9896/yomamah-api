@@ -1,7 +1,7 @@
 const Joke = require('../models/joke');
 const User = require('../models/user');
 
-//Humourous controllers that will make you die via suffocation from laughing so hard :D 
+// Humourous controllers that will make you die via suffocation from laughing so hard :D 
 
 const getRandomJoke = async (req, res) => {
     res.send('get random joke')
@@ -24,7 +24,16 @@ const editJoke = async (req, res) => {
 }
 
 const deleteJoke = async (req, res) => {
-    res.send('get joke')
+    const {user: {userID}, params: {id: jokeID}} = req;
+
+    const joke = await Joke.findByIdAndRemove(
+        {_id: jokeID,
+        createBy: userID}
+    )
+
+    if(!joke) {
+        throw new NotFoundError(`No joke found with ID ${id}`);
+    }
 }
 
 const getUser = async (req, res) => {
@@ -43,7 +52,8 @@ const getUser = async (req, res) => {
 }
 
 const getAllUsers = async (req, res) => {
-    res.send('get all user')
+    const users = await User.find({/* idk */ })
+    res.status(StatusCodes.OK).json({ /* idk */ })
 }
 
 const updateJoke = async (req, res) => {
