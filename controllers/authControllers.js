@@ -1,5 +1,5 @@
 //*codes for 8 hours then dies*
-const User = require('../models/user-schema')
+const User = require('../models/user')
 const JWT = require('jsonwebtoken')
 
 const login = async (req, res) => {

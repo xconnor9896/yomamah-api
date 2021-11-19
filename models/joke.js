@@ -17,8 +17,9 @@ const jokeSchema = new mongoose.Schema({
 
     avgRating: {
         type: Number,
-        
+        default: 0    
     }
+
 })
 
 module.exports = mongoose.model('Joke', jokeSchema)

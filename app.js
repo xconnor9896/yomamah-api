@@ -5,7 +5,7 @@ require('express-async-errors');
 // app essentials
 const express = require('express');
 const app = express();
-const connectDB = require('./db/connectDB');
+const connectDB = require('./db/connect');
 
 // security
 const rateLimiter = require('express-rate-limit');
@@ -20,10 +20,12 @@ const funnyLaughRouter = require('./routes/funnyLaughRoutes');
 // middleware
 const errorHandlerMiddleware = require('./middleware/error-handler');
 const notFound = require('./middleware/not-found');
-const auth = require('./middlware/auth');
+const auth = require('./middleware/auth');
 
 // other stuff
 const port = process.env.PORT || 3000;
+
+const minutes = 1000 * 60
 
 // app parameters
 app
