@@ -18,8 +18,13 @@ const jokeSchema = new mongoose.Schema({
     avgRating: {
         type: Number,
         default: 0    
-    }
+    },
 
+    createdBy: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'please provide user when making funnies']
+    },
 })
 
 module.exports = mongoose.model('Joke', jokeSchema)

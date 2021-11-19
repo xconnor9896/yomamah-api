@@ -4,15 +4,17 @@ const User = require('../models/user');
 //Humourous controllers that will make you die via suffocation from laughing so hard :D 
 
 const getRandomJoke = async (req, res) => {
-    res.send('get random joke')
+    
 }
 
 const getJoke = async (req, res) => {
-    res.send('get joke')
+    
 }
 
 const getAllJokes = async (req, res) => {
-    res.send('get all jokes')
+    const jokes = await Joke .find({createdBy: req.user.userID}).sort("createdAt")
+    
+    res.status(StatusCodes.OK).json({ jokes, count: jokes.length });
 }
 
 const createJoke = async (req, res) => {
