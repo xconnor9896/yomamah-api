@@ -18,7 +18,11 @@ const getAllJokes = async (req, res) => {
 }
 
 const createJoke = async (req, res) => {
-    res.send('create joke')
+    req.body.createdBy = req.user.userID;
+
+    const joke = await Joke.create(req.body);
+
+    res.status(StatusCodes.CREATED).json({ joke });
 }
 
 const editJoke = async (req, res) => {
