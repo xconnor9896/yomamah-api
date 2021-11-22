@@ -4,16 +4,16 @@ const User = require('../models/user');
 // Humourous controllers that will make you die via suffocation from laughing so hard :D 
 
 const getRandomJoke = async (req, res) => {
-    
+
 }
 
 const getJoke = async (req, res) => {
-    
+
 }
 
 const getAllJokes = async (req, res) => {
-    const jokes = await Joke .find({createdBy: req.user.userID}).sort("createdAt")
-    
+    const jokes = await Joke.find({ createdBy: req.user.userID }).sort("createdAt")
+
     res.status(StatusCodes.OK).json({ jokes, count: jokes.length });
 }
 
@@ -26,31 +26,51 @@ const createJoke = async (req, res) => {
 }
 
 const editJoke = async (req, res) => {
-    res.send('edit joke')
-}
+    const { punchline, type } = req.body;
+    const { userID } = req.user;
+    const { id: jokeID } = req.params;
 
-const deleteJoke = async (req, res) => {
-    const {user: {userID}, params: {id: jokeID}} = req;
+    if (!company || !position) {
+        throw new BadRequestError("Punchline and joke type fields must be filled");
+    }
 
-    const joke = await Joke.findByIdAndRemove(
-        {_id: jokeID,
-        createBy: userID}
+    const joke = await Joke.findByIdAndUpdate(
+        { _id: jokeID, createdBy: userID },
+        req.body,
+        { new: true, runValidators: true }
     )
 
     if(!joke) {
+        throw new NotFoundError(`No joke with ID ${id}`);
+    }
+
+    res.status(StatusCodes.OK).json({ joke });
+}
+
+const deleteJoke = async (req, res) => {
+    const { user: { userID }, params: { id: jokeID } } = req;
+
+    const joke = await Joke.findByIdAndRemove(
+        {
+            _id: jokeID,
+            createBy: userID
+        }
+    )
+
+    if (!joke) {
         throw new NotFoundError(`No joke found with ID ${id}`);
     }
 }
 
 const getUser = async (req, res) => {
-    const {username} = req.user;
-    const {id: userID} = req.params
+    const { username } = req.user;
+    const { id: userID } = req.params
 
     const user = await User.findOne({
         _id: userID
     })
 
-    if(!user) {
+    if (!user) {
         throw new NotFoundError(`${username} does not exist!`);
     }
 
@@ -63,8 +83,9 @@ const getAllUsers = async (req, res) => {
 }
 
 const updateJoke = async (req, res) => {
-    res.send('update joke')
+    res.send('update joke');
 }
+
 
 //maybe add more if we have time :)
 
