@@ -19,11 +19,12 @@ jokeRouter.route('/')
     .get(getRandomJoke)
     .get(getAllUsers)
     .put(() => updateJokeRating)
+    .post(createJoke)
 
 jokeRouter.route('/:id')
     .get(getJoke)
     .get(getUser)
-    .post(createJoke)
+    
     
 
 jokeRouter.route('/:user/:id')
