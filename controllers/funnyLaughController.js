@@ -10,13 +10,9 @@ const getRandomJoke = async (req, res) => {
 }
 
 const getJoke = async (req, res) => {
-    const { userID } = req.user
     const {id: jokeID} = req.params
 
-    const joke = await Joke.findOne({
-        id: jokeID,
-        createdBy: userID
-    })
+    const joke = await Joke.findOne({ id: jokeID })
 
     if(!joke){
         throw new NotFoundError('Joke not found, try a different search...')
@@ -31,7 +27,11 @@ const getAllJokes = async (req, res) => {
 }
 
 const createJoke = async (req, res) => {
-    res.send('create joke')
+    req.body.createdBy = req.user.userID;
+
+    const joke = await Joke.create(req.body);
+
+    res.status(StatusCodes.CREATED).json({ joke });
 }
 
 const editJoke = async (req, res) => {
@@ -39,7 +39,16 @@ const editJoke = async (req, res) => {
 }
 
 const deleteJoke = async (req, res) => {
-    res.send('get joke')
+    const {user: {userID}, params: {id: jokeID}} = req;
+
+    const joke = await Joke.findByIdAndRemove(
+        {_id: jokeID,
+        createBy: userID}
+    )
+
+    if(!joke) {
+        throw new NotFoundError(`No joke found with ID ${id}`);
+    }
 }
 
 const getUser = async (req, res) => {
@@ -58,7 +67,8 @@ const getUser = async (req, res) => {
 }
 
 const getAllUsers = async (req, res) => {
-    res.send('get all user')
+    const users = await User.find({/* idk */ })
+    res.status(StatusCodes.OK).json({ /* idk */ })
 }
 
 const updateJoke = async (req, res) => {
