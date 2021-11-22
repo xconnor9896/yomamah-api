@@ -1,14 +1,27 @@
 const Joke = require('../models/joke');
 const User = require('../models/user');
 
+const { NotFoundError, BadRequestError } = require('../errors');
+const { StatusCodes } = require('http-status-codes');
 //Humourous controllers that will make you die via suffocation from laughing so hard :D 
 
 const getRandomJoke = async (req, res) => {
-    
+    //idfk do later or something
 }
 
 const getJoke = async (req, res) => {
-    
+    const { userID } = req.user
+    const {id: jokeID} = req.params
+
+    const joke = await Joke.findOne({
+        id: jokeID,
+        createdBy: userID
+    })
+
+    if(!joke){
+        throw new NotFoundError('Joke not found, try a different search...')
+    }
+    res.status(StatusCodes.OK).json({joke})
 }
 
 const getAllJokes = async (req, res) => {
