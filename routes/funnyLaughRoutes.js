@@ -2,32 +2,33 @@ const express = require('express');
 
 const {
     getRandomJoke,
-    getJoke, 
-    getAllJokes, 
-    createJoke, 
-    editJoke, 
+    getJoke,
+    getAllJokes,
+    createJoke,
+    editJoke,
     deleteJoke,
     getUser,
     getAllUsers,
-    updateJokeRating
+
 } = require('../controllers/funnyLaughController')
 
 const jokeRouter = express.Router();
 
 jokeRouter.route('/')
-    .get(getAllJokes)
     .get(getRandomJoke)
-    .get(getAllUsers)
-    .put(() => updateJokeRating)
     .post(createJoke)
+
+jokeRouter.route('/users')
+    .get(getAllUsers)
+
+jokeRouter.route('/jokes')
+    .get(getAllJokes)
+
+jokeRouter.route('/user')
+    .get(getUser)
 
 jokeRouter.route('/:id')
     .get(getJoke)
-    .get(getUser)
-    
-    
-
-jokeRouter.route('/:user/:id')
     .put(() => editJoke)
     .delete(deleteJoke)
 

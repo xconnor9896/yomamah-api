@@ -9,7 +9,7 @@ authRouter.route('/register')
 authRouter.route('/login')
     .post(login)
 
-authRouter.route('/favorite/:id')
+authRouter.route('favorite/:id')
     .put(favoriteJoke)
 
 module.exports = authRouter
