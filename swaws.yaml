@@ -1,1 +1,252 @@
-PLACE HOLDER FOR WHEN WE DO THIS
+openapi: 3.0.0
+info:
+  title: Yo-Mama-API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://yo-mama-api.herokuapp.com
+  variables: {}
+paths:
+  /register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              username: epicfunnyman1
+              password: Iamveryfunny69
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              username: epicfunnyman1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jokes:
+    get:
+      tags:
+      - Jokes
+      summary: Get All Jokes
+      operationId: GetAllJokes
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /{id}:
+    put:
+      tags:
+      - Jokes
+      summary: Edit Joke
+      operationId: EditJoke
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: 619d59c77cb921a00e3c2936
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditJokeRequest'
+            example:
+              punchline: she can hang glide from a dorito
+              type: short
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Jokes
+      summary: Get Single Joke
+      operationId: GetSingleJoke
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: 619d59cc7cb921a00e3c2938
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Jokes
+      summary: Delete Joke
+      operationId: DeleteJoke
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: 619c027c4b5d2b853c49c50c
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /:
+    post:
+      tags:
+      - Jokes
+      summary: Create Joke
+      operationId: CreateJoke
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJokeRequest'
+            example:
+              punchline: she can hang glide from a dorito
+              type: short
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users:
+    get:
+      tags:
+      - Users
+      summary: Get All Users
+      operationId: GetAllUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/{id}:
+    get:
+      tags:
+      - Users
+      summary: Get Single User
+      operationId: GetSingleUser
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          example: 619bfef0371629aa9ed90fa9
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      example:
+        username: epicfunnyman1
+        password: Iamveryfunny69
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+      example:
+        username: epicfunnyman1
+    EditJokeRequest:
+      title: EditJokeRequest
+      required:
+      - punchline
+      - type
+      type: object
+      properties:
+        punchline:
+          type: string
+        type:
+          type: string
+      example:
+        punchline: she can hang glide from a dorito
+        type: short
+    CreateJokeRequest:
+      title: CreateJokeRequest
+      required:
+      - punchline
+      - type
+      type: object
+      properties:
+        punchline:
+          type: string
+        type:
+          type: string
+      example:
+        punchline: she can hang glide from a dorito
+        type: short
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: Auth
+- name: Jokes
+- name: Users
