@@ -17,11 +17,16 @@ const xss = require('xss-clean');
 const authRouter = require('./routes/authRoutes');
 const funnyLaughRouter = require('./routes/funnyLaughRoutes');
 
+// YAML stuff
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocs = YAML.load('./swaws.yaml');
 
 // middleware
 const errorHandlerMiddleware = require('./middleware/error-handler');
 const notFound = require('./middleware/not-found');
 const auth = require('./middleware/auth');
+const { load } = require('dotenv');
 
 // other stuff
 const port = process.env.PORT || 3000;
@@ -43,6 +48,7 @@ app
     .use(xss())
     // .get statement
     // routes
+    .use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
     .use('/api/v1/auth', authRouter)
     .use('/api/v1/joke', auth, funnyLaughRouter)
 
