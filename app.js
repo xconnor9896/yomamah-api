@@ -48,7 +48,7 @@ app
     .use(xss())
     // .get statement
     // routes
-    .use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
+    .get('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
     .use('/api/v1/auth', authRouter)
     .use('/api/v1/joke', auth, funnyLaughRouter)
 
