@@ -90,8 +90,8 @@ const getUser = async (req, res) => {
 }
 
 const getAllUsers = async (req, res) => {
-    const users = await User.find({/* idk */ })
-    res.status(StatusCodes.OK).json({ /* idk */ })
+    const users = await User.find({}).sort("username");
+    res.status(StatusCodes.OK).json({users})
 }
 
 const updateJoke = async (req, res) => {

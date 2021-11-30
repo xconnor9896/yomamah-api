@@ -24,7 +24,7 @@ jokeRouter.route('/users')
 jokeRouter.route('/jokes')
     .get(getAllJokes)
 
-jokeRouter.route('/user')
+jokeRouter.route('/user/:id')
     .get(getUser)
 
 jokeRouter.route('/:id')
