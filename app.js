@@ -48,7 +48,10 @@ app
     .use(xss())
     // .get statement
     // routes
-    .get('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
+    .get('/', (req, res) => {
+        res.send('<h1>API Documentation</h1><a href="/api-docs">Documentation</a>');
+    })
+    .use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
     .use('/api/v1/auth', authRouter)
     .use('/api/v1/joke', auth, funnyLaughRouter)
 
